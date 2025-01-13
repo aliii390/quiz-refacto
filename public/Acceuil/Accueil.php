@@ -64,6 +64,7 @@ $qcm->setQuestions($questions);
 <?php foreach($qcm->getQuestions() as $question): ?>
     <h3><?= $question->getIntituleQuestion() ?></h3>
     <?php endforeach; ?>
+    
     <?php foreach($question->getReponses() as $reponse): ?>
     <li><?= $reponse->getText() ?></li>
     <?php endforeach; ?>

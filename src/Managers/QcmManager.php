@@ -6,8 +6,11 @@
 
 
 final class QcmManager{
+   
 
-    public function generateDisplay(Qcm $qcm): string
+    // j'ai juste rajouter $qst je ferai la suite demain 
+
+    public function generateDisplay(Qcm $qcm , Question $qst): string
     {
 
         $nameQcm = htmlspecialchars($qcm->getTitle());
@@ -20,13 +23,22 @@ final class QcmManager{
 
 
 //   rajouter le deuxieme foreach pour les reponse et mettre les nom de variable dans le html en dessous
+       $textHtml= '';
+
+        foreach($qst->getReponses() as $reponse){
+            $ftTest = $reponse->getText();
+            $textHtml = "<li>". $ftTest."</li>";
+        }
+        
+
+
 
         $html = <<<HTML
 
             <section>
-                <h1>{$nameQcm}</h1>
+                <h1> {$questionsHtml}</h1>
                 <ul>
-                    {$questionsHtml}
+                   {$ftTest}
                 </ul>
             </section>
 
