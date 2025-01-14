@@ -3,18 +3,18 @@
 
 
 
-include_once '../../utils/autoloader.php';
+include_once '../utils/autoloader.php';
 
 $qcm = new Qcm("Nom qcm");
-$question = new Question("Nom question","Explication: ");
-$answer = [
-    new Answer("salut", true),
-    new Answer("test")
-];
+// $question = new Question("Nom question","Explication: ");
+// $answer = [
+//     new Answer("salut", true),
+//     new Answer("test")
+// ];
 
-$question->setTouteLesReponse($answer);
+// $question->setTouteLesReponse($answer);
 
-var_dump($qcm);
+// var_dump($qcm);
 
 
 
@@ -29,8 +29,8 @@ var_dump($qcm);
 
 ?>
 
-<?php require_once '../Components/Footer.php'; ?>
-<link rel="stylesheet" href="../css/style.css">
+<?php require_once './components/header.php'; ?>
+<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
@@ -59,16 +59,15 @@ var_dump($qcm);
   
 </section>
    
-<h2><?= $qcm->getTitle()?></h2>
-<?php foreach($qcm->getQuestions() as $question): ?>
-    <h3><?= $question->getIntituleQuestion() ?></h3>
-    <?php endforeach; ?>
+<h2>METTRE LES DONNER</h2>
+
+    <h3>METTRE LES DONNER</h3>
+ 
     
-    <?php foreach($question->getReponses() as $reponse): ?>
-    <li><?= $reponse->getText() ?></li>
-    <?php endforeach; ?>
+    <li>METTRE LES DONNER</li>
+   
 
 <a id=deconnexion href="../../process/clean-user-session.php">Déconnexion</a>
 
 
-<?php require_once '../Components/Footer.php'; ?>
+<?php require_once './components/footer.php'; ?>

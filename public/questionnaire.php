@@ -10,7 +10,7 @@ $qcm = new Qcm("Questionnaire PHP");
 $questionRepo = new QuestionRepository($pdo);
 
 // Ca récupère les Questions du quizz avec l'iD 2, et ça transforme toutes les questions en instances Questions
-$listeQuestions = $questionRepo->findAllQuizzId(2);
+$listeQuestions = $questionRepo->findAllQuizzId(1);
 
 foreach ($listeQuestions as $question) {
 
@@ -23,11 +23,7 @@ foreach ($listeQuestions as $question) {
 }
 
 
-
-
 // test pour afficher les réponses
-
-
 
 // A la fin, on met toutes les questions dans le QCM
 $qcm->setQuestions($listeQuestions);
@@ -35,24 +31,12 @@ $qcm->setQuestions($listeQuestions);
 // var_dump($qcm->getQuestions());
 
 
-
-
-
 // j'associe mes questions au qcm
-
-
-// var_dump($qcm->getQuestions());
 
 $qcManager = new QcmManager();
 
 // $qcm = $qcManager->getQcm();
 
-
-// pour la bdd
-// echo $qcManager->generateDisplay($qcm );
-
-// var_dump($qcManager);
-// die();
 
 ?>
 
@@ -72,7 +56,7 @@ $qcManager = new QcmManager();
     <main>
 
         <?= $qcManager->generateDisplay($qcm); ?>
-        <?= $qcmManager->generateReponse($qcm); ?>
+      
     </main>
 
 </body>
