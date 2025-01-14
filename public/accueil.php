@@ -12,14 +12,13 @@ $answer = [
     new Answer("test")
 ];
 
-
 $question->setTouteLesReponse($answer);
 
+var_dump($qcm);
 
-$questions = [
-    $question
-];
-$qcm->setQuestions($questions);
+
+
+
 
 // var_dump($qcm->getQuestions());
 // die();

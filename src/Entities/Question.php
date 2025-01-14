@@ -10,6 +10,8 @@ class Question {
     private string $explication;
 
 
+    // supprimer la fonction si j'en ai plus besoin
+
     public function __construct(string $intituleQuestion , string $explication){
 
         $this->intituleQuestion = $intituleQuestion;        
@@ -23,6 +25,9 @@ class Question {
         return $this->intituleQuestion;
     }
 
+
+// getter pour afficher dans une autre page 
+// setter pour modifier 
 
 
     public function  getReponses(){

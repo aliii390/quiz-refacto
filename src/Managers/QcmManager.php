@@ -1,96 +1,104 @@
-
-
-<?php 
+<?php
 
 // mettre les questions ici et créer une méthode generateDisplay
 
 
-final class QcmManager{
-   
+final class QcmManager
+{
+
+    // private QcmRepository $qcmRepository;
+
+    // public function __construct()
+    // {
+    //     $this->qcmRepository = new QcmRepository;
+    // }
+
+    // public function getQcm(int $id): Qcm
+    // {
+    //     $qcm = $this->qcmRepository->find($id);
+
+
+
+
+    //     return $qcm;
+    // }
 
     // j'ai juste rajouter $qst je ferai la suite demain 
 
-    public function generateDisplay(Qcm $qcm ): string
+    public function generateDisplay(Qcm $qcm): string
     {
 
-        $nameQcm = htmlspecialchars($qcm->getTitle());
+        // $nameQcm = htmlspecialchars($qcm->getTitle());
 
-        $questionsHtml = '';
-        foreach($qcm->getQuestions() as $question){
-            $questionName = htmlspecialchars($question->getIntituleQuestion());
-            $question->getReponses();
-            $questionsHtml .= "<li>" . $questionName . "</li>";
-
-            $textHtml = '';
-            foreach($question->getReponses()as $reponse){
-                $ftTest = $reponse->getText();
-                $textHtml .= "<li>". $ftTest."</li>";
-            }
-            
-        }
+        // $questionsHtml = '';
+        // foreach ($qcm->getQuestions() as $question) {
+        //     $questionName = htmlspecialchars($question->getIntituleQuestion());
+        //     $questionsHtml .= "<li>" . $questionName . "</li>";
 
 
-      
-
-     
-
-
-
-$html = <<<HTML
-
-    <!DOCTYPE html>
-    <html lang="en">
+        //     $textHtml = '';
+        //     foreach ($question->getReponses() as $reponse) {
+        //         $ftTest = $reponse->getText();
+        //         $textHtml .= "<li>" . $ftTest . "</li>";
+        //     }
+        // }
 
 
+        ob_start();
+?>
 
-
-<link rel="stylesheet" href="../../public/css/question.css">
-<script src="../../assets/JS/timer.js" defer></script>
-</head>
-
-<body>
-
-    <main>
         <form action="" method="post">
-            <h1 id=title>{$questionsHtml}</h1>
+            <h1 id=title><?= $qcm->getTitle() ?></h1>
             <p><span id="timer">15</span> secondes</p>
-                    <section class="question">
 
-                        <h2>
-                            < QUESTION-<span style="color: #9B5EBF;"> /></span>
-                        </h2>
 
-                        <div class="btn-placement">
-                            <div class="h3-placement">
-                                <h3>{$textHtml}</h3>
-                            </div>
-                            
-                            
-                                            <!-- rajouter un btn par reponses (le code est dans mon block notes) -->
+            <?php 
+            /**
+             * @var Question $question
+             */
+            foreach ($qcm->getQuestions() as $key => $question): ?>
+                <article class="question">
 
-                        
+                    <h2>
+                        < QUESTION-<span style="color: #9B5EBF;"> <?= $key +1 ?> /></span>
+                    </h2>
+
+                    <div class="btn-placement">
+                        <div class="h3-placement">
+                            <h3><?= $question->getIntituleQuestion() ?></h3>
                         </div>
 
-                    </section>
-                    <hr class="question-separator">
-        
-    
+
+                        <!-- rajouter un btn par reponses (le code est dans mon block notes) -->
+
+
+                        <?php
+                        /**
+                         * @var Answer $reponse
+                         */
+                        foreach($question->getReponses() as $reponse): ?> 
+
+                            
+                            <input type="radio" name="" type="button" value="<?= $reponse->getIsBonneReponse() ?>"><?= $reponse->getText() ?></input> <!-- un bouton par reponse   -->
+
+                        <?php endforeach ?> 
+
+
+                    </div>
+
+                </article>
+                <hr class="question-separator">
+            <?php endforeach ?>
+
+
             <div id=btnCentré>
                 <input type="submit" class="btn-submit" value="Voir les résultats">
             </div>
 
         </form>
-    </main>
 
+<?php
 
-HTML;
-        return $html;
-
+        return ob_get_clean();
     }
-    
-
-
-
-
-
 }

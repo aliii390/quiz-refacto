@@ -18,11 +18,12 @@ final class Answer
         $this->isBonneReponses = $isBonneReponses;
     }
 
-    public function getText()
+    public function getText(): string
     {
         return $this->text;
     }
-    public function getBonneReponse()
+
+    public function getIsBonneReponse(): bool
     {
         return $this->isBonneReponses;
     }

@@ -3,5 +3,5 @@
 <?php 
 
 
-header("Location: ../public/Login/Login.php");
+header("Location: ./public/login.php");
 exit;

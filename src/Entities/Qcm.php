@@ -5,7 +5,6 @@ class Qcm
 {
     private string $intitule;
     private array $questions;
-    private array $reponses;
     
 
     public function __construct(string $intitule)
