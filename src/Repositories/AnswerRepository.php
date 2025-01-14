@@ -10,12 +10,12 @@
 class AnswerRepository
 {
     private PDO $pdo;
-    private QuestionMapper $mapper;
+    private AnswerMapper $mapper;
 
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
-        $this->mapper = new QuestionMapper();
+        $this->mapper = new AnswerMapper();
     }
 
     /**
@@ -25,7 +25,7 @@ class AnswerRepository
 
     public function findAllAnswer(int $question_id): array
     {
-        $stmt = $this->pdo->prepare("SELECT answer.reponse, answer.is_correct
+        $stmt = $this->pdo->prepare("SELECT answer.reponse, answer.is_correct, answer.id_question
                FROM answer 
                WHERE answer.id_question = :question_id");
         $stmt->bindParam(":question_id", $question_id, PDO::PARAM_INT);

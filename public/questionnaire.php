@@ -10,30 +10,36 @@ $qcm = new Qcm("Questionnaire PHP");
 $questionRepo = new QuestionRepository($pdo);
 
 // Ca récupère les Questions du quizz avec l'iD 2, et ça transforme toutes les questions en instances Questions
-$listeQuestions = $questionRepo->findAllQuizzId(1);
+$listeQuestions = $questionRepo->findAllQuizzId(2);
 
-$qcm->setQuestions($listeQuestions);
+foreach ($listeQuestions as $question) {
 
-var_dump($qcm);
+    $answerTest = new AnswerRepository($pdo);
+
+    $id = $question->getId();
+
+    $listeAnswer = $answerTest->findAllAnswer($id);
+    $question->setTouteLesReponse($listeAnswer);
+}
+
+
 
 
 // test pour afficher les réponses
 
-$answerTest = new AnswerRepository($pdo);
 
-$listeAnswer = $answerTest->findAllAnswer(1);
-$question->setTouteLesReponse();
-var_dump($listeAnswer);
+
+// A la fin, on met toutes les questions dans le QCM
+$qcm->setQuestions($listeQuestions);
+// var_dump($listeAnswer);
+// var_dump($qcm->getQuestions());
 
 
 
 
 
 // j'associe mes questions au qcm
-$qcm->setQuestions([
-    $question,
-    $question2
-]);
+
 
 // var_dump($qcm->getQuestions());
 
@@ -66,8 +72,9 @@ $qcManager = new QcmManager();
     <main>
 
         <?= $qcManager->generateDisplay($qcm); ?>
+        <?= $qcmManager->generateReponse($qcm); ?>
     </main>
-    
+
 </body>
 
 </html>
