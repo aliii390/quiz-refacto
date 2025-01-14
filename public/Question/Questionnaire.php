@@ -5,10 +5,10 @@
 include_once '../../utils/autoloader.php';
 
 $qcm = new Qcm("Nom qcm");
-$question = new Question("Nom question","Explication: ");
+$question = new Question("Question devWeb","Explication: ");
 $answer = [
-    new Answer("salut", true),
-    new Answer("test")
+    new Answer("Choix numéro1", true),
+    new Answer("choix numéro2")
 ];
 
 
@@ -21,7 +21,7 @@ $questions = [
 $qcm->setQuestions($questions);
 $qcManager = new QcmManager();
 
-echo $qcManager->generateDisplay($qcm);
+echo $qcManager->generateDisplay($qcm , $question);
 
 // var_dump($qcManager);
 // die();
