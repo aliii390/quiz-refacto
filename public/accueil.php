@@ -17,7 +17,7 @@ $qcm = new Qcm("Nom qcm");
 // var_dump($qcm);
 
 
-
+var_dump($qcm->getTitle());
 
 
 // var_dump($qcm->getQuestions());

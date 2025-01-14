@@ -3,7 +3,7 @@
 
 
 class QuizzMapper{
-    public function MapperToObject(array $data){
+    public function mapToObject(array $data){
         return new Choix(
                 $data['id'],
                 $data['name'],
