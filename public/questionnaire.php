@@ -1,26 +1,33 @@
 <?php
 include_once '../utils/autoloader.php';
+include_once '../utils/bdd.php';
 
 // je crée un qcm vide
-$qcm = new Qcm("Nom qcm");
+$qcm = new Qcm("Questionnaire PHP");
 
-// je crée une question vide
-$question = new Question("Question devWeb", "Explication: ");
 
-// j'associe mes réponses à ma question
-$question->setTouteLesReponse([
-    new Answer("Choix numéro1", true),
-    new Answer("choix numéro2")
-]);
+// connexion avec repo
+$questionRepo = new QuestionRepository($pdo);
 
-// je fais une deuxieme question vide
-$question2 = new Question("Question POO", "La réponse est Programmation orientée objet");
+// Ca récupère les Questions du quizz avec l'iD 2, et ça transforme toutes les questions en instances Questions
+$listeQuestions = $questionRepo->findAllQuizzId(1);
 
-// j'associe des réponses possible à ma question 2
-$question2->setTouteLesReponse([
-    new Answer("Choix q2 numéro1", true),
-    new Answer("choix q2 numéro2")
-]);
+$qcm->setQuestions($listeQuestions);
+
+var_dump($qcm);
+
+
+// test pour afficher les réponses
+
+$answerTest = new AnswerRepository($pdo);
+
+$listeAnswer = $answerTest->findAllAnswer(1);
+$question->setTouteLesReponse();
+var_dump($listeAnswer);
+
+
+
+
 
 // j'associe mes questions au qcm
 $qcm->setQuestions([
@@ -32,8 +39,10 @@ $qcm->setQuestions([
 
 $qcManager = new QcmManager();
 
-$qcm = $qcManager->getQcm(1);
+// $qcm = $qcManager->getQcm();
 
+
+// pour la bdd
 // echo $qcManager->generateDisplay($qcm );
 
 // var_dump($qcManager);

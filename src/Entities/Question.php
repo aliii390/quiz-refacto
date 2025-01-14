@@ -8,15 +8,18 @@ class Question {
     private string $intituleQuestion;
     private array $reponses;
     private string $explication;
-
+    private int $id;
+    private int $id_quiz;
 
     // supprimer la fonction si j'en ai plus besoin
 
-    public function __construct(string $intituleQuestion , string $explication){
+    public function __construct(string $intituleQuestion , int $id, int $id_quiz){
 
         $this->intituleQuestion = $intituleQuestion;        
         $this->reponses = [];        
-        $this->explication = $explication;        
+    
+        $this->id = $id ;     
+        $this->id_quiz = $id_quiz  ;    
 
     }
    

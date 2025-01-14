@@ -6,42 +6,12 @@
 final class QcmManager
 {
 
-    // private QcmRepository $qcmRepository;
-
-    // public function __construct()
-    // {
-    //     $this->qcmRepository = new QcmRepository;
-    // }
-
-    // public function getQcm(int $id): Qcm
-    // {
-    //     $qcm = $this->qcmRepository->find($id);
-
-
-
-
-    //     return $qcm;
-    // }
 
     // j'ai juste rajouter $qst je ferai la suite demain 
 
     public function generateDisplay(Qcm $qcm): string
     {
 
-        // $nameQcm = htmlspecialchars($qcm->getTitle());
-
-        // $questionsHtml = '';
-        // foreach ($qcm->getQuestions() as $question) {
-        //     $questionName = htmlspecialchars($question->getIntituleQuestion());
-        //     $questionsHtml .= "<li>" . $questionName . "</li>";
-
-
-        //     $textHtml = '';
-        //     foreach ($question->getReponses() as $reponse) {
-        //         $ftTest = $reponse->getText();
-        //         $textHtml .= "<li>" . $ftTest . "</li>";
-        //     }
-        // }
 
 
         ob_start();
