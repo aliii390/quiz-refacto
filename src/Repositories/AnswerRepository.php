@@ -7,48 +7,42 @@
 // mettre la requete sql ici  créer plusieurs fonction dans le manager qcm 
 
 
-class AnswerRepository
+final class AnswerRepository extends AbstractRepository
 {
-    private PDO $pdo;
-    private AnswerMapper $mapper;
 
-    public function __construct(PDO $pdo)
+    public function __construct()
     {
-        $this->pdo = $pdo;
-        $this->mapper = new AnswerMapper();
+        parent::__construct();
     }
 
     /**
-     * Récupère toutes les questions ayant le même quiz_id et retourne un array
+     * Récupère toutes les réponses d'une question
+     * @param int $question_id
+     * @return array $answers
      */
-
-
-    public function findAllAnswer(int $question_id): array
+    public function findAllAnswersByQuestion(int $question_id): array
     {
-        $stmt = $this->pdo->prepare("SELECT answer.reponse, answer.is_correct, answer.id_question
+        $stmt = $this->pdo->prepare("SELECT *
                FROM answer 
                WHERE answer.id_question = :question_id");
         $stmt->bindParam(":question_id", $question_id, PDO::PARAM_INT);
         $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $answerDatas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-        if (!$data) {
+        if (!$answerDatas) {
             return [];
         }
-        $arrayAnswer = [];
+        $answers = [];
 
 
-        foreach ($data as $reponse) {
+        foreach ($answerDatas as $answerData) {
 
-            $objectReponse = $this->mapper->mapToObject($reponse);
+            $answer = AnswerMapper::mapToObject($answerData);
 
-            $arrayAnswer[] = $objectReponse;
-            
+            $answers[] = $answer;
         }
 
-        return $arrayAnswer;
-    
+        return $answers;
     }
-    }
-
+}

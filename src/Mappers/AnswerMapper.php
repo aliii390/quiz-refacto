@@ -1,20 +1,21 @@
 
 
-<?php 
+<?php
 
 
-  
-    class AnswerMapper
+
+class AnswerMapper implements MapperContract
 {
-    public function mapToObject(array $data)
+    public static function mapToObject(array $answerData): Answer
     {
         return new Answer(
-            $data['reponse'],
-            $data['is_correct'],
-            $data['id_question']
+            $answerData['id'],
+            $answerData['reponse'],
+            $answerData['is_correct']
 
         );
     }
+
+
 }
-
-
+ 

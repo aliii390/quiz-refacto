@@ -8,16 +8,21 @@
 
 final class Answer
 {
+    private int $id;
     private bool $isBonneReponses;
     private string $text;
-    private int $idQuestion;
 
 
-    public function __construct(string $text, bool $isBonneReponses = false , int $idQuestion)
+    public function __construct(int $id, string $text = '', bool $isBonneReponses = false)
     {
+        $this->id = $id;
         $this->text = $text;
         $this->isBonneReponses = $isBonneReponses;
-        $this->idQuestion = $idQuestion;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function getText(): string

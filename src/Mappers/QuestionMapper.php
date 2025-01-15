@@ -1,19 +1,14 @@
 
 <?php
 
-
-
-
-
-class QuestionMapper
+final class QuestionMapper implements MapperContract
 {
-    public function mapToObject(array $data)
+    public static function mapToObject(array $questionData): Question
+ 
     {
         return new Question(
-            $data['intitule'],
-            $data['id'],
-            $data['id_quiz']
-
+            $questionData['id'],
+            $questionData['intitule'],
         );
     }
 }

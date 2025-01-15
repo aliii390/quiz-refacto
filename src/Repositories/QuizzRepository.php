@@ -4,41 +4,51 @@
 
 
 
-class QuizzRepository{
-    private PDO $pdo;
-    private QuizzMapper $mapper;
-
-
-
-    public function __construct(PDO $pdo)
+final class QuizzRepository extends AbstractRepository
+{
+    public function __construct()
     {
-        $this->pdo = $pdo;
-        $this->mapper = new QuizzMapper();
+        parent::__construct();
     }
-
-
     
     /**
      * Récupère toutes les questions ayant le même quiz_id et retourne un array
      */
-    public function findAllTheme(int $idTheme){
-        $stmt = $this->pdo->prepare("SELECT * FROM question WHERE id_quiz = :idTheme");
-        $stmt->bindParam(":idTheme", $idTheme, PDO::PARAM_INT);
-        $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function findAll(): array
+    {
+        $stmt = $this->pdo->query("SELECT * FROM quiz");
+        $quizDatas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if(!$data){
+        if(!$quizDatas){
             return [];
         }
-        $arrayTheme = [];
-        foreach ($data as $theme) {
 
-            $objectTheme = $this->mapper->mapToObject($theme);
+        foreach ($quizDatas as $quizData) {
 
-            $arrayTheme[] = $objectTheme;
+            $quiz = QcmMapper::mapToObject($quizData);
+
+            $quizs[] = $quiz;
+           
             
         }
 
-        return $arrayTheme;
+        return $quizs;
+    }
+
+    public function find(int $idQuizz): Qcm
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM quiz WHERE id = :idQuizz");
+        $stmt->execute([
+            ':idQuizz' => $idQuizz,
+        ]);
+
+
+        $quizData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if(!$quizData){
+            return [];
+        }
+
+        return QcmMapper::mapToObject($quizData);
     }
 }

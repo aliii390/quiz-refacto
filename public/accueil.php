@@ -1,52 +1,32 @@
 <?php
 
-
-
-
 include_once '../utils/autoloader.php';
 
-$qcm = new Qcm("Nom qcm");
-// $question = new Question("Nom question","Explication: ");
-// $answer = [
-//     new Answer("salut", true),
-//     new Answer("test")
-// ];
 
-// $question->setTouteLesReponse($answer);
+$quizRepository = new QuizzRepository();
 
-// var_dump($qcm);
+$quizs = $quizRepository->findAll();
 
 
-var_dump($qcm->getTitle());
-
-
-// var_dump($qcm->getQuestions());
-// die();
-
-// var_dump($qcm);
-// die();
-
-
+require_once './components/header.php';
 ?>
-
-<?php require_once './components/header.php'; ?>
 <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
 
-<!-- <h1>Bienvenue </h1> mettre le nom de l'user -->
+    <!-- <h1>Bienvenue </h1> mettre le nom de l'user -->
 
 
-<h1>
-    < QUIZZ<span class="quiz404"> 404/> </span>
-</h1>
-<h2>Les bonnes réponses ne sont pas introuvables</h2>
-<h3>Voici les thèmes</h3>
+    <h1>
+        < QUIZZ<span class="quiz404"> 404/> </span>
+    </h1>
+    <h2>Les bonnes réponses ne sont pas introuvables</h2>
+    <h3>Voici les thèmes</h3>
 
-<section class="thème">
+    <section class="thème">
 
-  
+
         <div class="thèmeChoice">
             <!-- <img id="cssImage" src="">   Mettre une image ici -->
             <!-- <a href="../Question/question.php">Commencer</a> -->
@@ -56,18 +36,22 @@ var_dump($qcm->getTitle());
             </form>
         </div>
 
-  
-</section>
-   
-<h2>METTRE LES DONNER</h2>
 
-    <h3>METTRE LES DONNER</h3>
- 
-    
-    <li>METTRE LES DONNER</li>
-   
+    </section>
 
-<a id=deconnexion href="../../process/clean-user-session.php">Déconnexion</a>
+    <section>
+
+        <?php foreach ($quizs as $quiz): ?>
+            <a href="./questionnaire.php?idQuiz=<?= $quiz->getId() ?>">
+                <article>
+                    <h4><?= $quiz->getIntitule() ?></h4>
+
+                </article>
+            </a>
+        <?php endforeach ?>
+    </section>
+
+    <a id=deconnexion href="../../process/clean-user-session.php">Déconnexion</a>
 
 
-<?php require_once './components/footer.php'; ?>
+    <?php require_once './components/footer.php'; ?>

@@ -7,46 +7,38 @@
 // mettre la requete sql ici  créer plusieurs fonction dans le manager qcm 
 
 
-class QuestionRepository
+final class QuestionRepository extends AbstractRepository
 {
-    private PDO $pdo;
-    private QuestionMapper $mapper;
 
-    public function __construct(PDO $pdo)
+    public function __construct()
     {
-        $this->pdo = $pdo;
-        $this->mapper = new QuestionMapper();
+        parent::__construct();
     }
 
     /**
-     * Récupère toutes les questions ayant le même quiz_id et retourne un array
+     * Récupère toutes les questions d'un quiz
      */
-
-
-    public function findAllQuizzId(int $idQuizz): array
+    public function findAllQuestionByQuiz(int $idQuizz): array
     {
         $stmt = $this->pdo->prepare("SELECT * FROM question WHERE id_quiz = :idQuizz");
         $stmt->bindParam(":idQuizz", $idQuizz, PDO::PARAM_INT);
         $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $questionDatas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-        if (!$data) {
+        if (!$questionDatas) {
             return [];
         }
-        $arrayQuestions = [];
+        $questions = [];
 
 
-        foreach ($data as $question) {
+        foreach ($questionDatas as $questionData) {
 
-            $objectQuestion = $this->mapper->mapToObject($question);
+            $question = QuestionMapper::mapToObject($questionData);
 
-            $arrayQuestions[] = $objectQuestion;
-            
+            $questions[] = $question;
         }
 
-        return $arrayQuestions;
-    
+        return $questions;
     }
-    }
-
+}

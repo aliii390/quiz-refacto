@@ -1,46 +1,58 @@
 
-<?php 
+<?php
 
+// pour récup les questions
 
+class Question
+{
 
-class Question {
-
+    private int $id;
     private string $intituleQuestion;
     private array $reponses;
     private string $explication;
-    private int $id;
-    private int $id_quiz;
+
+
 
     // supprimer la fonction si j'en ai plus besoin
 
-    public function __construct(string $intituleQuestion , int $id, int $id_quiz){
+    public function __construct(int $id, string $intituleQuestion = '', string $explication = '', array $reponses = [])
+    {
 
-        $this->intituleQuestion = $intituleQuestion;        
-        $this->reponses = [];        
-    
-        $this->id = $id ;     
-        $this->id_quiz = $id_quiz  ;    
-
+        $this->id = $id;
+        $this->intituleQuestion = $intituleQuestion;
+        $this->reponses = $reponses;
+        $this->explication = $explication;
     }
-   
 
-    public function getIntituleQuestion(){
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+    public function getIntituleQuestion(): string
+    {
         return $this->intituleQuestion;
     }
 
 
-// getter pour afficher dans une autre page 
-// setter pour modifier 
+    // getter pour afficher dans une autre page 
+    // setter pour modifier 
 
 
-    public function  getReponses(){
+    public function  getReponses()
+    {
         return $this->reponses;
     }
 
 
 
-    
-    public function setTouteLesReponse(array $reponses)
+
+    public function setReponses(array $reponses): self
     {
         foreach ($reponses as $reponse) {
             if (!$reponse instanceof Answer) {
@@ -49,16 +61,14 @@ class Question {
         }
 
         $this->reponses = $reponses;
-
+        return $this;
     }
-
 
     /**
-     * Get the value of id
-     */ 
-    public function getId()
+     * Get the value of explication
+     */
+    public function getExplication()
     {
-        return $this->id;
+        return $this->explication;
     }
-
 }
