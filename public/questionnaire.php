@@ -3,6 +3,8 @@ include_once '../utils/autoloader.php';
 
 $qcmManager = new QcmManager();
 
+// var_dump($qcmManager);
+// die();
 // $qcm = $qcManager->getQcm();
 
 require_once './components/header.php';

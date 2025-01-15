@@ -2,6 +2,13 @@
 
 include_once '../utils/autoloader.php';
 
+session_start();
+
+/**
+ * @var User $_SESSION['user'] 
+ */
+var_dump($_SESSION['user']->getUsername());
+
 
 $quizRepository = new QuizzRepository();
 

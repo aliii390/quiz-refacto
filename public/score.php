@@ -1,9 +1,17 @@
 <?php
 include_once '../utils/autoloader.php';
 
+$score = 0;
 
-var_dump($_POST);
+foreach($_POST as $index => $givenAnswer){
 
+    if($givenAnswer === "1"){
+        $score++;
+    }
+
+}
+// var_dump($score);
+// die();
 require_once './components/header.php'
 ?>
 
@@ -14,8 +22,9 @@ require_once './components/header.php'
 <body>
     <main>
 
-
-<!-- faire le résultat -->
+    <h1> Vous avez eu <?= $score ?> /3</h1>
+<!-- faire le résultat ici créer un manager pour et un mapper  -->
+ 
 
     </main>
 

@@ -17,7 +17,7 @@ final class QcmManager
         $this->answerRepository = new AnswerRepository();
     }
 
-
+    // function qui génère le quiz 
     public function generateQuiz(int $idQuiz): string
     {
         $qcm = $this->buildQcm($idQuiz);
@@ -25,6 +25,8 @@ final class QcmManager
 
         return $this->displayQcm($qcm);
     }
+
+    // fin de function
 
     private function buildQcm(int $idQuiz): Qcm
     {
@@ -56,7 +58,7 @@ final class QcmManager
         ob_start();
 ?>
 
-        <form action="./resultat.php" method="post">
+        <form action="./score.php" method="post">
             <h1 id=title><?= $qcm->getIntitule() ?></h1>
             <p><span id="timer">15</span> secondes</p>
 

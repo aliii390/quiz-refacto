@@ -5,7 +5,7 @@
 session_start();
 
 if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-    header('Location: ./front/Acceuil/accueil.php');
+    header('Location: ./accueil.php');
     exit;
 }
 
@@ -29,15 +29,19 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
             < QUIZZ<span style="color: #9B5EBF;"> 404/> </span>
         </h1>
         <img src="./assets/img/image-fond1.jpg" alt="photo principal" width="600px">
-        <form action="./process/processUser.php" method="post">
+        <form action="../process/login-process.php" method="post">
             <div id="accueil">
-                <h2>Connectez vous à votre compte</h2>
-                <input type="text" name="username" id="pseudo" placeholder="Pseudonyme">
 
-                <input id="inputJouer" type="submit" value="JOUER">
+                <h2>Connectez vous à votre compte</h2>
+
+                <label for="username">Nom d'utilisateur :</label>
+                <input type="text" name="username"  id="pseudo" placeholder="Pseudonyme">
+
+                <input id="inputJouer" type="submit" value="Connectez-vous">
 
             </div>
         </form>
+
     </main>
 </body>
 
